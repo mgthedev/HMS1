@@ -24,7 +24,7 @@ const Dashboard = () => {
     const fetchDoctors = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:4000/api/v1/user/doctors"
+          "https://hmsback.vercel.app/api/v1/user/doctors"
         );
         setRegisteredDoctors(data.doctors.length);
       } catch (error) {
@@ -39,7 +39,7 @@ const Dashboard = () => {
   const handleUpdateStatus = async (appointmentId, status) => {
     try {
       const { data } = await axios.put(
-        `http://localhost:4000/api/v1/appointment/update/${appointmentId}`,
+        `https://hmsback.vercel.app/api/v1/appointment/update/${appointmentId}`,
         { status }
       );
       setAppointments((prevAppointments) =>
