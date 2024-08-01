@@ -44,7 +44,7 @@ const Footer = () => {
         <hr />
         <div className="content">
           <div>
-            <img src="/logo.png" alt="logo" className="logo-img"/>
+            <img src="/lg1.png" alt="logo" className="logo-img"/>
           </div>
           <div>
             <h4>Quick Links</h4>
@@ -69,15 +69,15 @@ const Footer = () => {
             <h4>Contact</h4>
             <div>
               <FaPhone />
-              <span>999-999-9999</span>
+              <span>+254 758 096537</span>
             </div>
             <div>
               <MdEmail />
-              <span>zeelab@gmail.com</span>
+              <span>jeffjimmy566@gmail.com</span>
             </div>
             <div>
               <FaLocationArrow />
-              <span>Karachi, Pakistan</span>
+              <span>Nairobi, Kenya</span>
             </div>
           </div>
         </div>

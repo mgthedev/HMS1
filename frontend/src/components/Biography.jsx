@@ -11,26 +11,20 @@ const Biography = ({imageUrl}) => {
           <p>Biography</p>
           <h3>Who We Are</h3>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus
-            blanditiis sequi aperiam. Debitis fugiat harum ex maxime illo
-            consequatur mollitia voluptatem omnis nihil nesciunt beatae esse
-            ipsam, sapiente totam aspernatur porro ducimus aperiam nisi. Ex
-            magnam voluptatum consectetur reprehenderit fugiat recusandae aut
-            similique illum natus velit, praesentium nostrum nesciunt. Deleniti,
-            nesciunt laboriosam totam iusto!
+          we empower hospitals and clinics with state-of-the-art management solutions. Our comprehensive 
+          Hospital Management System is designed to streamline operations, improve patient care, and enhance
+           overall efficiency. Discover how our technology can support your healthcare facility in delivering 
+           exceptional services.
           </p>
-          <p>We are all in 2024!</p>
-          <p>We are working on a MERN STACK PROJECT.</p>
+          <p>Key Features</p>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores
-            assumenda exercitationem accusamus sit repellendus quo optio dolorum
-            corporis corrupti. Quas similique vel minima veniam tenetur
-            obcaecati atque magni suscipit laboriosam! Veniam vitae minus nihil
-            cupiditate natus provident. Ex illum quasi pariatur odit nisi
-            voluptas illo qui ipsum mollitia. Libero, assumenda?
+          Patient Management: Simplify the patient journey from registration to discharge with seamless record-keeping and scheduling.
+Electronic Health Records (EHR): Secure and easily accessible digital records for informed decision-making.
+Billing & Finance: Efficient billing, invoicing, and financial tracking for accurate and transparent financial management.
+Inventory Management: Maintain optimal stock levels and reduce wastage with our integrated supply chain tools.
+Reporting & Analytics: Gain insights into performance metrics and trends to make data-driven decisions.
+Security & Compliance: Robust security measures ensure the protection of patient data and compliance with healthcare regulations.
           </p>
-          <p>Lorem ipsum dolor sit amet!</p>
-          <p>Coding is fun!</p>
         </div>
       </div>
     </>

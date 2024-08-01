@@ -7,16 +7,14 @@ const Hero = ({ title, imageUrl }) => {
         <div className="banner">
           <h1>{title}</h1>
           <p>
-            ZeeCare Medical Institute is a state-of-the-art facility dedicated
-            to providing comprehensive healthcare services with compassion and
-            expertise. Our team of skilled professionals is committed to
-            delivering personalized care tailored to each patient's needs. At
-            ZeeCare, we prioritize your well-being, ensuring a harmonious
-            journey towards optimal health and wellness.
+            In today fast-paced healthcare environment, efficient management is crucial for delivering 
+            quality patient care. Our Hospital Management System (HMS) provides a comprehensive solution 
+            designed to streamline operations, improve patient outcomes, and enhance the overall healthcare 
+            experience
           </p>
         </div>
         <div className="banner">
-          <img src={imageUrl} alt="hero" className="animated-image" />
+          <img src={"/hero1.png"} alt="hero" className="animated-image" />
           <span>
             <img src="/Vector.png" alt="vector" />
           </span>

@@ -1,62 +1,106 @@
-// Navbar.js
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-import { Context } from "../main";
-import logo from "../assets/logo3.png";
-import "../styles/Navbar.css";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-  const { isAuthenticated, setIsAuthenticated } = useContext(Context);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const handleLogout = () => {
-    setIsAuthenticated(false);
-  };
-
-  const goToDashboard = () => {
-    window.location.href = "https://hmsdash.vercel.app/";
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
   };
 
   return (
-    <nav>
-      <div className="logo">
+    <nav style={styles.nav}>
+      <div style={styles.logo}>
         <Link to="/">
-          <img src={logo} alt="ZeeCare Medical Institute" className="logo-img" />
+          <img
+            src="/h1.png"
+            alt="Logo"
+            style={styles.logoImg}
+          />
         </Link>
       </div>
-      <div className="navLinks">
-        <div className="links">
-          <Link to="/" className="link">
-            Home
-          </Link>
-          <Link to="/appointment" className="link">
-            Appointment
-          </Link>
-          <Link to="/about" className="link">
-            About
-          </Link>
-          <button onClick={goToDashboard} className="link">
-            Go to Dashboard
-          </button>
-        </div>
-        <div className="buttons">
-          {isAuthenticated ? (
-            <button onClick={handleLogout} className="logoutBtn btn">
-              Logout
-            </button>
-          ) : (
-            <>
-              <Link to="/login" className="loginBtn btn">
-                Login
-              </Link>
-              <Link to="/register" className="registerBtn btn">
-                Register
-              </Link>
-            </>
-          )}
-        </div>
+      <div
+        style={{
+          ...styles.navLinks,
+          ...(isOpen ? styles.navLinksOpen : {}),
+        }}
+      >
+        <Link to="/" style={styles.link}>Home</Link>
+        <Link to="/appointment" style={styles.link}>Appointment</Link>
+        <Link to="/about" style={styles.link}>About</Link>
+        <a href="https://hmsdash.vercel.app/" style={styles.adminPanelBtn}>Admin Panel</a>
+      </div>
+      <div onClick={handleToggle} style={styles.hamburger}>
+        &#9776;
       </div>
     </nav>
   );
+};
+
+const styles = {
+  nav: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '10px 20px',
+    backgroundColor: '#f0f0f0',
+    borderBottom: '1px solid #ddd',
+    position: 'fixed',
+    width: '100%',
+    top: 0,
+    left: 0,
+    zIndex: 1000,
+    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+  },
+  logo: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  logoImg: {
+    height: '50px',
+  },
+  navLinks: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '20px',
+    transition: 'transform 0.3s ease-in-out',
+  },
+  navLinksOpen: {
+    display: 'flex',
+    flexDirection: 'column',
+    position: 'absolute',
+    top: '60px',
+    right: '20px',
+    backgroundColor: '#f0f0f0',
+    width: '200px',
+    border: '1px solid #ddd',
+    borderRadius: '5px',
+    padding: '10px',
+    gap: '10px',
+    zIndex: 1000,
+  },
+  link: {
+    textDecoration: 'none',
+    color: '#333',
+    fontWeight: '500',
+    fontSize: '18px',
+    transition: 'color 0.3s',
+  },
+  adminPanelBtn: {
+    backgroundColor: '#007bff',
+    color: '#fff',
+    padding: '10px 20px',
+    borderRadius: '5px',
+    fontSize: '16px',
+    textDecoration: 'none',
+    fontWeight: '600',
+    transition: 'background-color 0.3s',
+  },
+  hamburger: {
+    display: 'none',
+    fontSize: '24px',
+    cursor: 'pointer',
+  },
 };
 
 export default Navbar;
