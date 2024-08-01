@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { Context } from "../main";
+import { Navigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -7,11 +9,13 @@ const Dashboard = () => {
   const [totalAppointments, setTotalAppointments] = useState(0);
   const [registeredDoctors, setRegisteredDoctors] = useState(0);
 
+  const { isAuthenticated, admin } = useContext(Context);
+
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
         const { data } = await axios.get(
-          "https://hmsback.vercel.app/api/appointment/getall",
+          "http://localhost:4000/api/appointment/getall",
           { withCredentials: true }
         );
         setAppointments(data.appointments);
@@ -25,7 +29,7 @@ const Dashboard = () => {
     const fetchDoctors = async () => {
       try {
         const { data } = await axios.get(
-          "https://hmsback.vercel.app/api/v1/user/doctors",
+          "http://localhost:4000/api/v1/user/doctors",
           { withCredentials: true }
         );
         setRegisteredDoctors(data.doctors.length);
@@ -41,7 +45,7 @@ const Dashboard = () => {
   const handleUpdateStatus = async (appointmentId, status) => {
     try {
       const { data } = await axios.put(
-        `https://hmsback.vercel.app/api/v1/appointment/update/${appointmentId}`,
+        `http://localhost:4000/api/v1/appointment/update/${appointmentId}`,
         { status },
         { withCredentials: true }
       );
@@ -63,6 +67,10 @@ const Dashboard = () => {
     handleUpdateStatus(appointmentId, selectedStatus);
   };
 
+  if (!isAuthenticated) {
+    return <Navigate to={"/login"} />;
+  }
+
   return (
     <section className="dashboard page">
       <div className="banner">
@@ -71,10 +79,10 @@ const Dashboard = () => {
           <div className="content">
             <div>
               <p>Hello,</p>
-              <h5>Welcome to your dashboard</h5>
+              <h5>{admin ? `${admin.firstName} ${admin.lastName}` : "Loading..."}</h5>
             </div>
             <p>
-              Here you can manage appointments and view statistics.
+              Welcome to your dashboard. Here you can manage appointments and view statistics.
             </p>
           </div>
         </div>
