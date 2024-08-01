@@ -1,5 +1,5 @@
 // Sidebar.js
-import React, { useContext, useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { TiHome } from "react-icons/ti";
 import { RiLogoutBoxFill } from "react-icons/ri";
 import { AiFillMessage } from "react-icons/ai";
@@ -11,14 +11,12 @@ import { BsPeopleFill } from "react-icons/bs";
 import { HiUserGroup } from "react-icons/hi";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { Context } from "../main";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo3.png";
 
 const Sidebar = () => {
   const [show, setShow] = useState(false);
   const sidebarRef = useRef(null);
-  const { isAuthenticated, setIsAuthenticated } = useContext(Context);
   const navigateTo = useNavigate();
 
   useEffect(() => {
@@ -35,60 +33,21 @@ const Sidebar = () => {
   }, []);
 
   const handleLogout = async () => {
-    await axios
-      .get("http://localhost:4000/api/v1/user/admin/logout", {
+    try {
+      const { data } = await axios.get("https://hmsback.vercel.app/api/v1/user/logout", {
         withCredentials: true,
-      })
-      .then((res) => {
-        toast.success(res.data.message);
-        setIsAuthenticated(false);
-      })
-      .catch((err) => {
-        toast.error(err.response.data.message);
       });
+      toast.success(data.message);
+      // Handle additional logout actions if needed
+    } catch (error) {
+      toast.error(error.response?.data?.message);
+    }
   };
 
-  const gotoHomePage = () => {
-    navigateTo("/");
+  const navigateToPage = (path) => {
+    navigateTo(path);
     setShow(false);
   };
-
-  const gotoDoctorsPage = () => {
-    navigateTo("/doctors");
-    setShow(false);
-  };
-
-  const gotoMessagesPage = () => {
-    navigateTo("/messages");
-    setShow(false);
-  };
-
-  const gotoAddNewDoctor = () => {
-    navigateTo("/doctor/addnew");
-    setShow(false);
-  };
-
-  const gotoAddNewAdmin = () => {
-    navigateTo("/admin/addnew");
-    setShow(false);
-  };
-
-  const gotoPatientsPage = () => {
-    navigateTo("/patients");
-    setShow(false);
-  };
-
-  const gotoReceptionistsPage = () => {
-    navigateTo("/receptionists");
-    setShow(false);
-  };
-
-  const gotoFrontend = () => {
-    window.location.href = "https://hmsfront.vercel.app/";
-    setShow(false);
-  };
-
- 
 
   return (
     <>
@@ -97,36 +56,36 @@ const Sidebar = () => {
           <img src={logo} alt="Logo" className="logo" />
         </div>
         <div className="links">
-          <div onClick={gotoHomePage}>
+          <div onClick={() => navigateToPage("/")}>
             <TiHome />
             <span>Home</span>
           </div>
-          <div onClick={gotoDoctorsPage}>
+          <div onClick={() => navigateToPage("/doctors")}>
             <FaUserDoctor />
             <span>Doctors</span>
           </div>
-          <div onClick={gotoAddNewAdmin}>
+          <div onClick={() => navigateToPage("/admin/addnew")}>
             <MdAddModerator />
             <span>Add New Admin</span>
           </div>
-          <div onClick={gotoAddNewDoctor}>
+          <div onClick={() => navigateToPage("/doctor/addnew")}>
             <IoPersonAddSharp />
             <span>Add New Doctor</span>
           </div>
-          <div onClick={gotoPatientsPage}>
+          <div onClick={() => navigateToPage("/patients")}>
             <BsPeopleFill />
             <span>Patients</span>
           </div>
-          <div onClick={gotoReceptionistsPage}>
+          <div onClick={() => navigateToPage("/receptionists")}>
             <HiUserGroup />
             <span>Receptionists</span>
           </div>
-          <div onClick={gotoMessagesPage}>
+          <div onClick={() => navigateToPage("/messages")}>
             <AiFillMessage />
             <span>Messages</span>
           </div>
-          <div onClick={gotoFrontend}>
-            <TiHome /> {/* Use a suitable icon */}
+          <div onClick={() => window.location.href = "https://hmsfront.vercel.app/"}>
+            <TiHome />
             <span>Go to Frontend</span>
           </div>
           <div onClick={handleLogout}>
@@ -135,14 +94,8 @@ const Sidebar = () => {
           </div>
         </div>
       </nav>
-      <div
-        className="wrapper"
-        style={!isAuthenticated ? { display: "none" } : { display: "flex" }}
-      >
-        <GiHamburgerMenu
-          className="hamburger"
-          onClick={() => setShow(!show)}
-        />
+      <div className="wrapper" style={{ display: "flex" }}>
+        <GiHamburgerMenu className="hamburger" onClick={() => setShow(!show)} />
       </div>
     </>
   );
