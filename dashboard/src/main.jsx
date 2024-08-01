@@ -12,7 +12,7 @@ const AppWrapper = () => {
   useEffect(() => {
     const fetchAdminData = async () => {
       try {
-        const { data } = await axios.get("http://localhost:4000/api/v1/user/admin/me", {
+        const { data } = await axios.get("https://hmsback.vercel.app/api/v1/user/admin/me", {
           withCredentials: true,
         });
         setAdmin(data.admin);
