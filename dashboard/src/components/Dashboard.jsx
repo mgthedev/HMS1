@@ -38,14 +38,16 @@ const Dashboard = () => {
       }
     };
 
-    fetchAppointments();
-    fetchDoctors();
-  }, []);
+    if (isAuthenticated) {
+      fetchAppointments();
+      fetchDoctors();
+    }
+  }, [isAuthenticated]);
 
   const handleUpdateStatus = async (appointmentId, status) => {
     try {
       const { data } = await axios.put(
-        `https://hmsback.vercel.app/api/v1/appointment/update/${appointmentId}`,
+        `https://hmsback.vercel.app/api/appointment/update/${appointmentId}`,
         { status },
         { withCredentials: true }
       );
@@ -81,9 +83,7 @@ const Dashboard = () => {
               <p>Hello,</p>
               <h5>{admin ? `${admin.firstName} ${admin.lastName}` : "Loading..."}</h5>
             </div>
-            <p>
-              Welcome to your dashboard. Here you can manage appointments and view statistics.
-            </p>
+            <p>Welcome to your dashboard. Here you can manage appointments and view statistics.</p>
           </div>
         </div>
         <div className="secondBox">
@@ -95,49 +95,40 @@ const Dashboard = () => {
           <h3>{registeredDoctors}</h3>
         </div>
       </div>
-      <div className="banner">
-        <h5>Appointments</h5>
+
+      <section className="details">
+        <h3>Appointment Requests</h3>
         <table>
           <thead>
             <tr>
-              <th>Patient</th>
-              <th>Date</th>
+              <th>Name</th>
               <th>Doctor</th>
-              <th>Department</th>
+              <th>Date</th>
               <th>Status</th>
-              <th>Visited</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {appointments.length > 0 ? (
-              appointments.map((appointment) => (
-                <tr key={appointment._id}>
-                  <td>{`${appointment.firstName} ${appointment.lastName}`}</td>
-                  <td>{new Date(appointment.appointment_date).toLocaleString()}</td>
-                  <td>{`${appointment.doctor.firstName} ${appointment.doctor.lastName}`}</td>
-                  <td>{appointment.department}</td>
-                  <td>
-                    <select
-                      value={appointment.visited ? "visited" : "pending"}
-                      onChange={(e) => handleStatusChange(e, appointment._id)}
-                    >
-                      <option value="pending">Pending</option>
-                      <option value="visited">Visited</option>
-                    </select>
-                  </td>
-                  <td>
-                    {appointment.visited ? "Yes" : "No"}
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="6">No Appointments Found!</td>
+            {appointments.map((appointment) => (
+              <tr key={appointment._id}>
+                <td>{appointment.name}</td>
+                <td>{appointment.doctorName}</td>
+                <td>{appointment.date}</td>
+                <td>{appointment.status}</td>
+                <td>
+                  <select
+                    value={appointment.status === "approved" ? "visited" : "pending"}
+                    onChange={(e) => handleStatusChange(e, appointment._id)}
+                  >
+                    <option value="pending">Pending</option>
+                    <option value="visited">Visited</option>
+                  </select>
+                </td>
               </tr>
-            )}
+            ))}
           </tbody>
         </table>
-      </div>
+      </section>
     </section>
   );
 };

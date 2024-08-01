@@ -8,9 +8,7 @@ export const isAdminAuthenticated = catchAsyncErrors(
   async (req, res, next) => {
     const token = req.cookies.adminToken;
     if (!token) {
-      return next(
-        new ErrorHandler("Dashboard User is not authenticated!", 401) // Changed to 401 for authentication errors
-      );
+      return next(new ErrorHandler("Dashboard User is not authenticated!", 401));
     }
 
     try {
@@ -23,13 +21,11 @@ export const isAdminAuthenticated = catchAsyncErrors(
       }
       // Check if user is an Admin
       if (req.user.role !== "Admin") {
-        return next(
-          new ErrorHandler(`${req.user.role} not authorized for this resource!`, 403)
-        );
+        return next(new ErrorHandler(`${req.user.role} not authorized for this resource!`, 403));
       }
       next();
     } catch (error) {
-      console.error("Token verification failed:", error); // Debugging statement
+      console.error("Token verification failed:", error);
       return next(new ErrorHandler("Invalid or expired token!", 401));
     }
   }
@@ -40,7 +36,7 @@ export const isPatientAuthenticated = catchAsyncErrors(
   async (req, res, next) => {
     const token = req.cookies.patientToken;
     if (!token) {
-      return next(new ErrorHandler("User is not authenticated!", 401)); // Changed to 401 for authentication errors
+      return next(new ErrorHandler("User is not authenticated!", 401));
     }
 
     try {
@@ -53,13 +49,11 @@ export const isPatientAuthenticated = catchAsyncErrors(
       }
       // Check if user is a Patient
       if (req.user.role !== "Patient") {
-        return next(
-          new ErrorHandler(`${req.user.role} not authorized for this resource!`, 403)
-        );
+        return next(new ErrorHandler(`${req.user.role} not authorized for this resource!`, 403));
       }
       next();
     } catch (error) {
-      console.error("Token verification failed:", error); // Debugging statement
+      console.error("Token verification failed:", error);
       return next(new ErrorHandler("Invalid or expired token!", 401));
     }
   }
@@ -68,13 +62,8 @@ export const isPatientAuthenticated = catchAsyncErrors(
 // Middleware to authorize users based on roles
 export const isAuthorized = (...roles) => {
   return (req, res, next) => {
-    // Check if user has one of the authorized roles
     if (!roles.includes(req.user.role)) {
-      return next(
-        new ErrorHandler(
-          `${req.user.role} not allowed to access this resource!`, 403
-        )
-      );
+      return next(new ErrorHandler(`${req.user.role} not allowed to access this resource!`, 403));
     }
     next();
   };

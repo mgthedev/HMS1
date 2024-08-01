@@ -12,37 +12,28 @@ import { errorMiddleware } from "./middlewares/errorMiddleware.js";
 const app = express();
 config({ path: "./config/config.env" });
 
-app.use(
-    cors({
-        origin: [process.env.FRONTEND_URL, process.env.DASHBOARD_URL,"https://hmsfront.vercel.app", "https://hmsdash.vercel.app", "http://localhost:5173", "http://localhost:5174"],
-        methods: ["GET", "POST", "PUT", "DELETE"],
-        credentials: true,
-    })
-);
+app.use(cors({
+    origin: [process.env.FRONTEND_URL, process.env.DASHBOARD_URL, "https://hmsfront.vercel.app", "https://hmsdash.vercel.app", "http://localhost:5173", "http://localhost:5174"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+}));
 
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(
-    fileUpload({
-        useTempFiles: true,
-        tempFileDir: "/tmp/",
-    })
-);
+app.use(fileUpload({ useTempFiles: true, tempFileDir: "/tmp/" }));
 
 // Define your API routes here
 app.use("/api/v1/message", messageRouter);
 app.use("/api/appointment", appointmentRouter);
 app.use("/api/v1/user", userRouter);
 
-// Add a default route to handle the root path
 app.get("/", (req, res) => {
     res.send("Backend server is running!");
 });
 
 dbConnection();
-
 app.use(errorMiddleware);
 
 export default app;

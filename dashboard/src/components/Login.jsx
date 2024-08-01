@@ -1,92 +1,67 @@
-import React, { useContext, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { Context } from "../main";
+import React, { useState, useContext } from "react";
 import axios from "axios";
-
-// Utility function for error handling
-const handleError = (error) => {
-  if (error.response) {
-    return error.response.data.message || "An error occurred";
-  } else if (error.request) {
-    return "No response received from the server";
-  } else {
-    return "Error in setting up the request";
-  }
-};
+import { Context } from "../main";
+import { toast } from "react-toastify";
+import { Navigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const { isAuthenticated, setIsAuthenticated } = useContext(Context);
-  const navigateTo = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
-  // Handle login function
-  const handleLogin = async (e) => {
+  const { setUser, isAuthenticated } = useContext(Context);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
-      const response = await axios.post(
+      const { data } = await axios.post(
         "https://hmsback.vercel.app/api/v1/user/login",
-        { email, password, confirmPassword, role: "Admin" },
-        {
-          withCredentials: true,
-          headers: { "Content-Type": "application/json" },
-        }
+        { email, password },
+        { withCredentials: true }
       );
-
-      // Handle successful login
-      toast.success(response.data.message);
-      setIsAuthenticated(true);
-      navigateTo("/dashboard"); // Redirect to the dashboard
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
+      setUser(data.user);
+      toast.success("Logged in successfully");
     } catch (error) {
-      // Handle errors
-      toast.error(handleError(error));
+      toast.error(error.response.data.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  // Redirect if already authenticated
   if (isAuthenticated) {
     return <Navigate to="/dashboard" />;
   }
 
   return (
-    <>
-      <section className="container form-component">
-        <img src="/logo.png" alt="logo" className="logo" />
-        <h1 className="form-title">WELCOME TO ZEECARE</h1>
-        <p>Only Admins Are Allowed To Access These Resources!</p>
-        <form onSubmit={handleLogin}>
+    <div className="login">
+      <form onSubmit={handleSubmit}>
+        <h2>Login</h2>
+        <div>
+          <label>Email</label>
           <input
-            type="text"
-            placeholder="Email"
+            type="email"
+            placeholder="Enter your email"
+            required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
           />
+        </div>
+        <div>
+          <label>Password</label>
           <input
             type="password"
-            placeholder="Password"
+            placeholder="Enter your password"
+            required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
           />
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-          <div style={{ justifyContent: "center", alignItems: "center" }}>
-            <button type="submit">Login</button>
-          </div>
-        </form>
-      </section>
-    </>
+        </div>
+        <button type="submit" disabled={isLoading}>
+          {isLoading ? "Logging in..." : "Login"}
+        </button>
+      </form>
+    </div>
   );
 };
 
