@@ -30,7 +30,7 @@ app.use("/api/appointment", appointmentRouter);
 app.use("/api/v1/user", userRouter);
 
 app.get("/", (req, res) => {
-    res.send("Backend server is running!");
+    res.send("Cloud server is running!");
 });
 
 dbConnection();
