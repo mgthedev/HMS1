@@ -1,3 +1,4 @@
+// Sidebar.js
 import React, { useContext, useState, useRef, useEffect } from "react";
 import { TiHome } from "react-icons/ti";
 import { RiLogoutBoxFill } from "react-icons/ri";
@@ -5,9 +6,9 @@ import { AiFillMessage } from "react-icons/ai";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaUserDoctor } from "react-icons/fa6";
 import { MdAddModerator } from "react-icons/md";
-import { IoPersonAddSharp, IoPersonAddOutline } from "react-icons/io5"; // Use IoPersonAddOutline for nurse icon
-import { BsPeopleFill } from "react-icons/bs"; // New icon for patients
-import { HiUserGroup } from "react-icons/hi"; // New icon for receptionists
+import { IoPersonAddSharp } from "react-icons/io5"; 
+import { BsPeopleFill } from "react-icons/bs";
+import { HiUserGroup } from "react-icons/hi";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Context } from "../main";
@@ -17,7 +18,6 @@ import logo from "../assets/logo3.png";
 const Sidebar = () => {
   const [show, setShow] = useState(false);
   const sidebarRef = useRef(null);
-
   const { isAuthenticated, setIsAuthenticated } = useContext(Context);
   const navigateTo = useNavigate();
 
@@ -83,6 +83,13 @@ const Sidebar = () => {
     setShow(false);
   };
 
+  const gotoFrontend = () => {
+    window.location.href = "https://hmsfront.vercel.app/";
+    setShow(false);
+  };
+
+ 
+
   return (
     <>
       <nav ref={sidebarRef} className={show ? "show sidebar" : "sidebar"}>
@@ -117,6 +124,10 @@ const Sidebar = () => {
           <div onClick={gotoMessagesPage}>
             <AiFillMessage />
             <span>Messages</span>
+          </div>
+          <div onClick={gotoFrontend}>
+            <TiHome /> {/* Use a suitable icon */}
+            <span>Go to Frontend</span>
           </div>
           <div onClick={handleLogout}>
             <RiLogoutBoxFill />

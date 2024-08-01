@@ -79,7 +79,7 @@ const Dashboard = () => {
           <div className="content">
             <div>
               <p>Hello,</p>
-              <h5>{admin && `${admin.firstName} ${admin.lastName}`}</h5>
+              <h5>{admin ? `${admin.firstName} ${admin.lastName}` : "Loading..."}</h5>
             </div>
             <p>
               Welcome to your dashboard. Here you can manage appointments and view statistics.
@@ -109,7 +109,7 @@ const Dashboard = () => {
             </tr>
           </thead>
           <tbody>
-            {appointments && appointments.length > 0 ? (
+            {appointments.length > 0 ? (
               appointments.map((appointment) => (
                 <tr key={appointment._id}>
                   <td>{`${appointment.firstName} ${appointment.lastName}`}</td>

@@ -1,3 +1,4 @@
+// Navbar.js
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../main";
@@ -9,6 +10,10 @@ const Navbar = () => {
 
   const handleLogout = () => {
     setIsAuthenticated(false);
+  };
+
+  const goToDashboard = () => {
+    window.location.href = "https://hmsdash.vercel.app/";
   };
 
   return (
@@ -29,6 +34,9 @@ const Navbar = () => {
           <Link to="/about" className="link">
             About
           </Link>
+          <button onClick={goToDashboard} className="link">
+            Go to Dashboard
+          </button>
         </div>
         <div className="buttons">
           {isAuthenticated ? (
