@@ -1,16 +1,16 @@
 import express from "express";
-import {config} from 'dotenv';
+import { config } from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
-import {dbConnection} from "./database/dbConnection.js";
+import { dbConnection } from "./database/dbConnection.js";
 import messageRouter from "./router/messageRouter.js";
 import appointmentRouter from "./router/appointmentRouter.js";
 import userRouter from "./router/userRouter.js";
-import {errorMiddleware} from "./middlewares/errorMiddleware.js";
+import { errorMiddleware } from "./middlewares/errorMiddleware.js";
 
 const app = express();
-config({path: "./config/config.env"});
+config({ path: "./config/config.env" });
 
 app.use(
     cors({
@@ -22,7 +22,7 @@ app.use(
 
 app.use(cookieParser());
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
 app.use(
     fileUpload({
@@ -31,11 +31,18 @@ app.use(
     })
 );
 
+// Define your API routes here
 app.use("/api/v1/message", messageRouter);
 app.use("/api/appointment", appointmentRouter);
 app.use("/api/v1/user", userRouter);
 
-dbConnection()
+// Add a default route to handle the root path
+app.get("/", (req, res) => {
+    res.send("Backend server is running!");
+});
+
+dbConnection();
 
 app.use(errorMiddleware);
+
 export default app;
