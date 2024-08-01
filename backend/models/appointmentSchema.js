@@ -66,12 +66,12 @@ const appointmentSchema = new mongoose.Schema({
   },
   doctorId: {
     type: mongoose.Schema.ObjectId,
-    required: [true, "Doctor Id Is Invalid!"],
+    required: [false, "Doctor Id Is Invalid!"],
   },
   patientId: {
     type: mongoose.Schema.ObjectId,
     ref: "User",
-    required: [true, "Patient Id Is Required!"],
+    required: [false, "Patient Id Is Required!"],
   },
   status: {
     type: String,

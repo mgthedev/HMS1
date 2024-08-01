@@ -58,13 +58,12 @@ const AddNewDoctor = () => {
       formData.append("doctorDepartment", doctorDepartment);
       formData.append("docAvatar", docAvatar);
       await axios
-        .post("http://localhost:4000/api/v1/user/doctor/addnew", formData, {
+        .post("https://hmsback.vercel.app/api/v1/user/doctor/addnew", formData, {
           withCredentials: true,
           headers: { "Content-Type": "multipart/form-data" },
         })
         .then((res) => {
           toast.success(res.data.message);
-          setIsAuthenticated(true);
           navigateTo("/");
           setFirstName("");
           setLastName("");
@@ -80,9 +79,7 @@ const AddNewDoctor = () => {
     }
   };
 
-  if (!isAuthenticated) {
-    return <Navigate to={"/login"} />;
-  }
+  
   return (
     <section className="page">
       <section className="container add-doctor-form">
@@ -92,7 +89,7 @@ const AddNewDoctor = () => {
             <div className="avatar">
               <img
                 src={
-                  docAvatarPreview ? `${docAvatarPreview}` : "/docHolder.jpg"
+                  docAvatarPreview ? `${docAvatarPreview}` : "/doc.png"
                 }
                 alt="Doctor Avatar"
                 className="avatar-img"
