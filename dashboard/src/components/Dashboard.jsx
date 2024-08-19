@@ -57,7 +57,7 @@ const Dashboard = () => {
             {appointments.length > 0 ? (
               appointments.map((appointment) => (
                 <tr key={appointment._id}>
-                  <td>{`${appointment.firstName} ${appointment.lastName}`}</td>
+                  <td>{`${appointment.name}`}</td>
                   <td>{new Date(appointment.appointment_date).toLocaleString()}</td>
                   <td>{appointment.department}</td>
                 </tr>
