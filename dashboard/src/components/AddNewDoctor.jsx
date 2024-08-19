@@ -49,7 +49,7 @@ const AddNewDoctor = () => {
       formData.append("Department", doctorDepartment);
       formData.append("Avatar", docAvatar);
 
-      await axios.post("https://hmsback.vercel.app/api/v1/user/doctor/addnew", formData, {
+      await axios.post("https://emsback.vercel.app/api/v1/user/doctor/addnew", formData, {
         withCredentials: true,
         headers: { "Content-Type": "multipart/form-data" },
       }).then((res) => {

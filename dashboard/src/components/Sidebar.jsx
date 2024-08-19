@@ -60,7 +60,7 @@ const Sidebar = () => {
             <AiFillMessage />
             <span>Messages Issues</span>
           </div>
-          <div onClick={() => window.location.href = "https://hmsfront.vercel.app/"}>
+          <div onClick={() => window.location.href = "https://emsfront.vercel.app/"}>
             <TiHome />
             <span>Go to Frontend</span>
           </div>

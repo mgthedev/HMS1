@@ -10,7 +10,7 @@ const Messages = () => {
     const fetchMessages = async () => {
       try {
         const { data } = await axios.get(
-          "https://hmsback.vercel.app/api/v1/message/getall",
+          "https://emsback.vercel.app/api/v1/message/getall",
           { withCredentials: true }
         );
         setMessages(data.messages);

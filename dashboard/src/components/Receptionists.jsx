@@ -13,7 +13,7 @@ const Receptionists = () => {
 
   const fetchReceptionists = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/api/v1/receptionists");
+      const response = await axios.get("https://emsback.vercel.app/api/v1/receptionists");
       setReceptionists(response.data.receptionists);
     } catch (error) {
       toast.error("Error fetching receptionists");

@@ -13,7 +13,7 @@ const app = express();
 config({ path: "./config/config.env" });
 
 app.use(cors({
-    origin: [process.env.FRONTEND_URL, process.env.DASHBOARD_URL, "https://hmsfront.vercel.app", "https://hmsdash.vercel.app", "http://localhost:5173", "http://localhost:5174"],
+    origin: [process.env.FRONTEND_URL, process.env.DASHBOARD_URL, "https://emsfront.vercel.app", "https://emsadmin.vercel.app", "http://localhost:5173", "http://localhost:5174"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
 }));

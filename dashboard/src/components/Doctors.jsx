@@ -9,7 +9,7 @@ const Doctors = () => {
     const fetchDoctors = async () => {
       try {
         const { data } = await axios.get(
-          "https://hmsback.vercel.app/api/v1/user/doctors",
+          "https://emsback.vercel.app/api/v1/user/doctors",
           { withCredentials: true }
         );
         setDoctors(data.doctors);

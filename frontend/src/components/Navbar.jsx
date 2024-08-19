@@ -27,7 +27,7 @@ const Navbar = () => {
       >
         <Link to="/" style={styles.link}>Home</Link>
         <Link to="/appointment" style={styles.link}>Appointment</Link>
-        <a href="https://hmsdash.vercel.app/" style={styles.adminPanelBtn}>Admin Panel</a>
+        <a href="https://emsadmin.vercel.app/" style={styles.adminPanelBtn}>Admin Panel</a>
       </div>
       <div onClick={handleToggle} style={styles.hamburger}>
         &#9776;

@@ -20,7 +20,7 @@ const AppointmentForm = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "https://hmsback.vercel.app/api/appointment/post",
+        "https://emsback.vercel.app/api/appointment/post",
         {
           name,
           email,

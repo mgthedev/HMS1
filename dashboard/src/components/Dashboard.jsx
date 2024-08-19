@@ -10,13 +10,13 @@ const Dashboard = () => {
     const fetchAppointments = async () => {
       try {
         const { data } = await axios.get(
-          "https://hmsback.vercel.app/api/appointment/getall"
+          "https://emsback.vercel.app/api/appointment/getall"
         );
         setAppointments(data.appointments);
         setTotalAppointments(data.appointments.length);
       } catch (error) {
         setAppointments([]);
-        toast.error("Failed to fetch appointments");
+        toast.error("Fetching appointments appointments");
       }
     };
 

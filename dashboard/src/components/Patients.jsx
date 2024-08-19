@@ -13,7 +13,7 @@ const Patients = () => {
 
   const fetchPatients = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/api/v1/patients");
+      const response = await axios.get("https://emsback.vercel.app/api/v1/patients");
       setPatients(response.data.patients);
     } catch (error) {
       toast.error("Error fetching patients");
