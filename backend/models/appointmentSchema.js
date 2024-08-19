@@ -7,11 +7,6 @@ const appointmentSchema = new mongoose.Schema({
     required: [true, "First Name is required!"],
     minLength: [3, "First Name must contain at least 3 characters!"],
   },
-  lastName: {
-    type: String,
-    required: [true, "Last Name is required!"],
-    minLength: [3, "Last Name must contain at least 3 characters!"],
-  },
   email: {
     type: String,
     required: [true, "Email is required!"],

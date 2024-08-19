@@ -8,7 +8,6 @@ export const postAppointment = catchAsyncErrors(async (req, res, next) => {
 
   const appointment = await Appointment.create({
     firstName,
-    lastName,
     email,
     phone,
     appointment_date,
