@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import validator from "validator";
 
 const appointmentSchema = new mongoose.Schema({
-  firstName: {
+  Name: {
     type: String,
     required: [true, "First Name is required!"],
     minLength: [3, "First Name must contain at least 3 characters!"],
@@ -15,8 +15,8 @@ const appointmentSchema = new mongoose.Schema({
   phone: {
     type: String,
     required: [true, "Phone is required!"],
-    minLength: [11, "Phone Number must contain exactly 11 digits!"],
-    maxLength: [11, "Phone Number must contain exactly 11 digits!"],
+    minLength: [10, "Phone Number must contain exactly 10 digits!"],
+    maxLength: [10, "Phone Number must contain exactly 10 digits!"],
   },
   appointment_date: {
     type: String,
@@ -25,10 +25,6 @@ const appointmentSchema = new mongoose.Schema({
   department: {
     type: String,
     required: [true, "Department Name is required!"],
-  },
-  address: {
-    type: String,
-    required: [true, "Address is required!"],
   },
   status: {
     type: String,

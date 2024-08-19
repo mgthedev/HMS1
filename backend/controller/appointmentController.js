@@ -4,15 +4,14 @@ import { Appointment } from "../models/appointmentSchema.js";
 
 // Create a new appointment
 export const postAppointment = catchAsyncErrors(async (req, res, next) => {
-  const { firstName, lastName, email, phone, appointment_date, department, address } = req.body;
+  const {  Name, email, phone, appointment_date, department } = req.body;
 
   const appointment = await Appointment.create({
-    firstName,
+    Name,
     email,
     phone,
     appointment_date,
     department,
-    address,
     status: "pending",
   });
 
