@@ -9,11 +9,10 @@ const Home = () => {
     <>
       <Hero
         title={
-          "Hospital Management System"
+          "Employee Management System"
         }
-        imageUrl={"/h1.png"}
+        imageUrl={"/el.png"}
       />
-      <Biography imageUrl={"/aboutus.jpg"} />
       <Departments />
       <MessageForm />
     </>

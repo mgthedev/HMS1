@@ -14,7 +14,7 @@ const MessageForm = () => {
     try {
       await axios
         .post(
-          "http://localhost:4000/api/v1/message/send",
+          "https://hmsback.vercel.app/api/v1/message/send",
           { firstName, lastName, email, phone, message },
           {
             withCredentials: true,
@@ -37,7 +37,7 @@ const MessageForm = () => {
   return (
     <>
       <div className="container form-component message-form">
-        <h2>Send Us A Message</h2>
+        <h2>Have an issue, describe it below to be sorted</h2>
         <form onSubmit={handleMessage}>
           <div>
             <input

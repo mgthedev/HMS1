@@ -7,14 +7,12 @@ const Hero = ({ title, imageUrl }) => {
         <div className="banner">
           <h1>{title}</h1>
           <p>
-            In today fast-paced healthcare environment, efficient management is crucial for delivering 
-            quality patient care. Our Hospital Management System (HMS) provides a comprehensive solution 
-            designed to streamline operations, improve patient outcomes, and enhance the overall healthcare 
-            experience
+          Our Employee Management System is designed to streamline all HR processes, helping you stay 
+          organized and focused on what truly matters—your people
           </p>
         </div>
         <div className="banner">
-          <img src={"/hero1.png"} alt="hero" className="animated-image" />
+          <img src={"/el.png"} alt="hero" className="animated-image" />
           <span>
             <img src="/Vector.png" alt="vector" />
           </span>

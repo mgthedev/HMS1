@@ -6,55 +6,37 @@ import jwt from "jsonwebtoken";
 const userSchema = new mongoose.Schema({
   firstName: {
     type: String,
-    required: [true, "First Name Is Required!"],
-    minLength: [3, "First Name Must Contain At Least 3 Characters!"],
+    required: [true, "First Name is required!"],
+    minLength: [3, "First Name must contain at least 3 characters!"],
   },
   lastName: {
     type: String,
-    required: [true, "Last Name Is Required!"],
-    minLength: [3, "Last Name Must Contain At Least 3 Characters!"],
+    required: [true, "Last Name is required!"],
+    minLength: [3, "Last Name must contain at least 3 characters!"],
   },
   email: {
     type: String,
-    required: [true, "Email Is Required!"],
-    validate: [validator.isEmail, "Provide A Valid Email!"],
+    required: [true, "Email is required!"],
+    validate: [validator.isEmail, "Provide a valid email!"],
   },
   phone: {
     type: String,
-    required: [true, "Phone Is Required!"],
-    minLength: [11, "Phone Number Must Contain Exact 11 Digits!"],
-    maxLength: [11, "Phone Number Must Contain Exact 11 Digits!"],
-  },
-  nic: {
-    type: String,
-    required: [true, "NIC Is Required!"],
-    minLength: [13, "NIC Must Contain Only 13 Digits!"],
-    maxLength: [13, "NIC Must Contain Only 13 Digits!"],
-  },
-  dob: {
-    type: Date,
-    required: [true, "DOB Is Required!"],
-  },
-  gender: {
-    type: String,
-    required: [true, "Gender Is Required!"],
-    enum: ["Male", "Female"],
+    required: [true, "Phone is required!"],
+    minLength: [10, "Phone Number must contain exactly 10 digits!"],
+    maxLength: [10, "Phone Number must contain exactly 10 digits!"],
   },
   password: {
     type: String,
-    required: [true, "Password Is Required!"],
-    minLength: [8, "Password Must Contain At Least 8 Characters!"],
+    required: [true, "Password is required!"],
+    minLength: [8, "Password must contain at least 8 characters!"],
     select: false,
   },
   role: {
     type: String,
-    required: [true, "User Role Required!"],
-    enum: ["Patient", "Doctor", "Admin"],
+    required: [true, "User role is required!"],
+    enum: ["Patient", "Doctor", "Admin"], // Changed Doctor to Employee
   },
-  doctorDepartment:{
-    type: String,
-  },
-  docAvatar: {
+  avatar: {
     public_id: String,
     url: String,
   },

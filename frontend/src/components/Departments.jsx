@@ -5,41 +5,25 @@ import "react-multi-carousel/lib/styles.css";
 const Departments = () => {
   const departmentsArray = [
     {
-      name: "Pediatrics",
-      imageUrl: "/pedi.jpg",
+      name: "IT",
+      imageUrl: "/it.jpg",
     },
     {
-      name: "Orthopedics",
-      imageUrl: "/ortho.png",
+      name: "HUMAN RESOURCE",
+      imageUrl: "/hr.jpg",
     },
     {
-      name: "Cardiology",
-      imageUrl: "/cardi.png",
+      name: "ACCOUNTING",
+      imageUrl: "/ac.jpg",
     },
     {
-      name: "Neurology",
-      imageUrl: "/neuro.png",
+      name: "SETTLEMENT AND DISPUTES",
+      imageUrl: "/ag.jpg",
     },
     {
-      name: "Oncology",
-      imageUrl: "/onco.png",
-    },
-    {
-      name: "Radiology",
-      imageUrl: "/radio.png",
-    },
-    {
-      name: "Physical Therapy",
-      imageUrl: "/ptherap.png",
-    },
-    {
-      name: "Dermatology",
-      imageUrl: "/derm.png",
-    },
-    {
-      name: "ENT",
-      imageUrl: "/ent.jpg",
-    },
+      name: "LAND TITLES",
+      imageUrl: "/td.jpeg",
+    }
   ];
 
   const responsive = {
