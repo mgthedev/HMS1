@@ -2,10 +2,10 @@ import mongoose from "mongoose";
 import validator from "validator";
 
 const appointmentSchema = new mongoose.Schema({
-  Name: {
+  name: {
     type: String,
-    required: [true, "First Name is required!"],
-    minLength: [3, "First Name must contain at least 3 characters!"],
+    required: [true, "Name is required!"],
+    minLength: [3, " Name must contain at least 3 characters!"],
   },
   email: {
     type: String,
