@@ -8,7 +8,7 @@ import { IoPersonAddSharp } from "react-icons/io5";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import logo from "/lg1.png";
+import logo from "/el.png";
 
 const Sidebar = () => {
   const [show, setShow] = useState(false);
@@ -48,17 +48,17 @@ const Sidebar = () => {
           </div>
           <div onClick={() => navigateToPage("/doctors")}>
             <FaUserDoctor />
-            <span>Doctors</span>
+            <span>Employees</span>
           </div>
           
           <div onClick={() => navigateToPage("/doctor/addnew")}>
             <IoPersonAddSharp />
-            <span>Add New Doctor</span>
+            <span>Add New Employee</span>
           </div>
          
           <div onClick={() => navigateToPage("/messages")}>
             <AiFillMessage />
-            <span>Messages</span>
+            <span>Messages Issues</span>
           </div>
           <div onClick={() => window.location.href = "https://hmsfront.vercel.app/"}>
             <TiHome />

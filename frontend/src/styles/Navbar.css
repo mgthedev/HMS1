@@ -3,13 +3,19 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  background-color: #212121; /* Adjust color as needed */
-  max-width: 1200px; /* Set maximum width */
-  margin: 0 auto; /* Center the navbar */
+  background-color: #212121;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .logo-img {
-  width: 120px; /* Adjust size as needed */
+  width: 120px;
 }
 
 .navLinks {
@@ -34,91 +40,48 @@ nav {
   color: #cccccc;
 }
 
-.buttons {
-  display: flex;
-  gap: 15px;
-}
-
-.btn {
-  padding: 8px 20px;
-  color: #ffffff;
-  background-color: #646cff; /* Adjust color as needed */
-  border-radius: 20px;
-  font-size: 14px; /* Adjust font size */
-  font-weight: 600;
-  text-decoration: none;
-  transition: background-color 0.3s;
-}
-
-.btn:hover {
-  background-color: #535bf2; /* Adjust hover color as needed */
-}
-
-
-
-
-
-
-
-
-
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #111; /* Change the background color as needed */
-  padding: 20px;
-}
-
-.logo {
-  flex: 1;
-}
-
-.logo-img {
-  width: 150px;
-}
-
-.navLinks {
-  flex: 2;
-}
-
-.links {
-  display: flex;
-}
-
-.link {
-  color: #fff; /* Set the color of navigation links to white */
-  text-decoration: none;
-  font-size: 20px;
-  font-weight: 500;
-  margin-right: 20px;
-}
-
-.buttons {
-  display: flex;
-}
-
-.btn {
-  border-radius: 8px;
-  border: none;
+.adminPanelBtn {
   padding: 10px 20px;
+  color: #ffffff;
+  background-color: #007bff;
+  border-radius: 20px;
   font-size: 16px;
   font-weight: 600;
-  margin-right: 10px;
+  text-decoration: none;
+}
+
+.adminPanelBtn:hover {
+  background-color: #0056b3;
+}
+
+.hamburger {
+  display: none;
+  font-size: 24px;
   cursor: pointer;
 }
 
-.loginBtn {
-  background-color: #646cff; /* Change the login button color as needed */
-  color: #fff; /* Set the text color to white */
-}
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .navLinks {
+    display: none;
+  }
 
-.registerBtn {
-  background-color: #9083d5; /* Change the register button color as needed */
-  color: #fff; /* Set the text color to white */
-}
+  .navLinksOpen {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background-color: #212121;
+    width: 200px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    gap: 10px;
+    z-index: 1000;
+  }
 
-.logoutBtn {
-  background-color: #ff3d3d; /* Change the logout button color as needed */
-  color: #fff; /* Set the text color to white */
+  .hamburger {
+    display: block;
+  }
 }

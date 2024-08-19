@@ -1,36 +1,28 @@
-import React, { useContext, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Context } from "../main";
 import axios from "axios";
 
 const AddNewDoctor = () => {
-  const { isAuthenticated, setIsAuthenticated } = useContext(Context);
-
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [nic, setNic] = useState("");
   const [dob, setDob] = useState("");
   const [gender, setGender] = useState("");
   const [password, setPassword] = useState("");
-  const [doctorDepartment, setDoctorDepartment] = useState("");
+  const [Department, setDoctorDepartment] = useState("");
   const [docAvatar, setDocAvatar] = useState("");
   const [docAvatarPreview, setDocAvatarPreview] = useState("");
 
   const navigateTo = useNavigate();
 
   const departmentsArray = [
-    "Pediatrics",
-    "Orthopedics",
-    "Cardiology",
-    "Neurology",
-    "Oncology",
-    "Radiology",
-    "Physical Therapy",
-    "Dermatology",
-    "ENT",
+    "SETTLEMENT AND DISPUTES",
+    "ACCOUNTING",
+    "IT",
+    "HUMAN RESOURCE",
+    "LAND TITLES",
   ];
 
   const handleAvatar = (e) => {
@@ -52,50 +44,44 @@ const AddNewDoctor = () => {
       formData.append("email", email);
       formData.append("phone", phone);
       formData.append("password", password);
-      formData.append("nic", nic);
       formData.append("dob", dob);
       formData.append("gender", gender);
-      formData.append("doctorDepartment", doctorDepartment);
-      formData.append("docAvatar", docAvatar);
-      await axios
-        .post("https://hmsback.vercel.app/api/v1/user/doctor/addnew", formData, {
-          withCredentials: true,
-          headers: { "Content-Type": "multipart/form-data" },
-        })
-        .then((res) => {
-          toast.success(res.data.message);
-          navigateTo("/");
-          setFirstName("");
-          setLastName("");
-          setEmail("");
-          setPhone("");
-          setNic("");
-          setDob("");
-          setGender("");
-          setPassword("");
-        });
+      formData.append("Department", doctorDepartment);
+      formData.append("Avatar", docAvatar);
+
+      await axios.post("https://hmsback.vercel.app/api/v1/user/doctor/addnew", formData, {
+        withCredentials: true,
+        headers: { "Content-Type": "multipart/form-data" },
+      }).then((res) => {
+        toast.success(res.data.message);
+        navigateTo("/");
+        setFirstName("");
+        setLastName("");
+        setEmail("");
+        setPhone("");
+        setDob("");
+        setGender("");
+        setPassword("");
+      });
     } catch (error) {
       toast.error(error.response.data.message);
     }
   };
 
-  
   return (
     <section className="page">
       <section className="container add-doctor-form">
-        <h1 className="form-title">REGISTER A NEW DOCTOR</h1>
+        <h1 className="form-title">REGISTER A NEW Employee</h1>
         <form onSubmit={handleAddNewDoctor}>
           <div className="first-wrapper">
             <div className="avatar">
               <img
-                src={
-                  docAvatarPreview ? `${docAvatarPreview}` : "/doc.png"
-                }
-                alt="Doctor Avatar"
+                src={docAvatarPreview ? `${docAvatarPreview}` : "/el.png"}
+                alt="Photo"
                 className="avatar-img"
               />
               <label htmlFor="avatar" className="avatar-label">
-                Upload Avatar
+                Upload Picture
               </label>
               <input
                 type="file"
@@ -133,15 +119,9 @@ const AddNewDoctor = () => {
                 onChange={(e) => setPhone(e.target.value)}
                 className="input-field"
               />
+              {/* Removed NIC Field */}
               <input
-                type="number"
-                placeholder="NIC"
-                value={nic}
-                onChange={(e) => setNic(e.target.value)}
-                className="input-field"
-              />
-              <input
-                type={"date"}
+                type="date"
                 placeholder="Date of Birth"
                 value={dob}
                 onChange={(e) => setDob(e.target.value)}
@@ -164,23 +144,19 @@ const AddNewDoctor = () => {
                 className="input-field"
               />
               <select
-                value={doctorDepartment}
-                onChange={(e) => {
-                  setDoctorDepartment(e.target.value);
-                }}
+                value={Department}
+                onChange={(e) => setDoctorDepartment(e.target.value)}
                 className="input-field"
               >
                 <option value="">Select Department</option>
-                {departmentsArray.map((depart, index) => {
-                  return (
-                    <option value={depart} key={index}>
-                      {depart}
-                    </option>
-                  );
-                })}
+                {departmentsArray.map((depart, index) => (
+                  <option value={depart} key={index}>
+                    {depart}
+                  </option>
+                ))}
               </select>
               <button type="submit" className="submit-btn">
-                Register New Doctor
+                Register New Employee
               </button>
             </div>
           </div>

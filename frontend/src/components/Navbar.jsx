@@ -13,7 +13,7 @@ const Navbar = () => {
       <div style={styles.logo}>
         <Link to="/">
           <img
-            src="/h1.png"
+            src="el.png"
             alt="Logo"
             style={styles.logoImg}
           />
@@ -27,7 +27,6 @@ const Navbar = () => {
       >
         <Link to="/" style={styles.link}>Home</Link>
         <Link to="/appointment" style={styles.link}>Appointment</Link>
-        <Link to="/about" style={styles.link}>About</Link>
         <a href="https://hmsdash.vercel.app/" style={styles.adminPanelBtn}>Admin Panel</a>
       </div>
       <div onClick={handleToggle} style={styles.hamburger}>
@@ -43,7 +42,7 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: '10px 20px',
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#212121',
     borderBottom: '1px solid #ddd',
     position: 'fixed',
     width: '100%',
@@ -71,7 +70,7 @@ const styles = {
     position: 'absolute',
     top: '60px',
     right: '20px',
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#212121',
     width: '200px',
     border: '1px solid #ddd',
     borderRadius: '5px',
@@ -81,7 +80,7 @@ const styles = {
   },
   link: {
     textDecoration: 'none',
-    color: '#333',
+    color: '#fff',
     fontWeight: '500',
     fontSize: '18px',
     transition: 'color 0.3s',
@@ -100,6 +99,17 @@ const styles = {
     display: 'none',
     fontSize: '24px',
     cursor: 'pointer',
+  },
+  '@media (max-width: 768px)': {
+    hamburger: {
+      display: 'block',
+    },
+    navLinks: {
+      display: 'none',
+    },
+    navLinksOpen: {
+      display: 'flex',
+    },
   },
 };
 

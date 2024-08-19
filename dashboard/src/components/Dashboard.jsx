@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 const Dashboard = () => {
   const [appointments, setAppointments] = useState([]);
   const [totalAppointments, setTotalAppointments] = useState(0);
-  const [registeredDoctors, setRegisteredDoctors] = useState(0);
 
   useEffect(() => {
     const fetchAppointments = async () => {
@@ -21,50 +20,14 @@ const Dashboard = () => {
       }
     };
 
-    const fetchDoctors = async () => {
-      try {
-        const { data } = await axios.get(
-          "https://hmsback.vercel.app/api/v1/user/doctors"
-        );
-        setRegisteredDoctors(data.doctors.length);
-      } catch (error) {
-        toast.error("Failed to fetch doctors");
-      }
-    };
-
     fetchAppointments();
-    fetchDoctors();
   }, []);
-
-  const handleUpdateStatus = async (appointmentId, status) => {
-    try {
-      const { data } = await axios.put(
-        `https://hmsback.vercel.app/api/v1/appointment/update/${appointmentId}`,
-        { status }
-      );
-      setAppointments((prevAppointments) =>
-        prevAppointments.map((appointment) =>
-          appointment._id === appointmentId
-            ? { ...appointment, status, visited: status === "approved" }
-            : appointment
-        )
-      );
-      toast.success(data.message);
-    } catch (error) {
-      toast.error(error.response.data.message);
-    }
-  };
-
-  const handleStatusChange = (e, appointmentId) => {
-    const selectedStatus = e.target.value === "visited" ? "approved" : "pending";
-    handleUpdateStatus(appointmentId, selectedStatus);
-  };
 
   return (
     <section className="dashboard page">
       <div className="banner">
         <div className="firstBox">
-          <img src="/cardi.png" alt="docImg" />
+          <img src="/el.png" alt="dems" />
           <div className="content">
             <div>
               <p>Hello,</p>
@@ -79,22 +42,15 @@ const Dashboard = () => {
           <p>Total Appointments</p>
           <h3>{totalAppointments}</h3>
         </div>
-        <div className="thirdBox">
-          <p>Registered Doctors</p>
-          <h3>{registeredDoctors}</h3>
-        </div>
       </div>
       <div className="banner">
         <h5>Appointments</h5>
         <table>
           <thead>
             <tr>
-              <th>Patient</th>
+              <th>User</th>
               <th>Date</th>
-              <th>Doctor</th>
               <th>Department</th>
-              <th>Status</th>
-              <th>Visited</th>
             </tr>
           </thead>
           <tbody>
@@ -103,25 +59,12 @@ const Dashboard = () => {
                 <tr key={appointment._id}>
                   <td>{`${appointment.firstName} ${appointment.lastName}`}</td>
                   <td>{new Date(appointment.appointment_date).toLocaleString()}</td>
-                  <td>{`${appointment.doctor.firstName} ${appointment.doctor.lastName}`}</td>
                   <td>{appointment.department}</td>
-                  <td>
-                    <select
-                      value={appointment.visited ? "visited" : "pending"}
-                      onChange={(e) => handleStatusChange(e, appointment._id)}
-                    >
-                      <option value="pending">Pending</option>
-                      <option value="visited">Visited</option>
-                    </select>
-                  </td>
-                  <td>
-                    {appointment.visited ? "Yes" : "No"}
-                  </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="6">No Appointments Found!</td>
+                <td colSpan="3">No Appointments Found!</td>
               </tr>
             )}
           </tbody>
